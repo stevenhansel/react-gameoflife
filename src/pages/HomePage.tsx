@@ -47,7 +47,6 @@ const HomePage: React.FC = () => {
      * 4. A dead cell with exactly three live neighbours will become alive.
      */
     setGrid((previousGrid) => {
-      console.log("gets called");
       return produce(previousGrid, (newGrid) => {
         for (let i = 0; i < NUM_ROWS; i++) {
           for (let j = 0; j < NUM_COLS; j++) {

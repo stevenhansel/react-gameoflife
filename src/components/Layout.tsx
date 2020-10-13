@@ -6,7 +6,7 @@ const Layout: React.FC = (props) => {
   return (
     <Box display="flex" alignItems="center" justifyContent="center" mt={12}>
       <Helmet>
-        <title>Game of Life | @stevenhansel</title>
+        <title>Game of Life | Steven Hansel</title>
       </Helmet>
       {props.children}
     </Box>
