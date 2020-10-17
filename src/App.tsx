@@ -2,8 +2,7 @@ import React from "react";
 
 import { Helmet } from "react-helmet";
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
-import { BrowserRouter } from "react-router-dom";
-import Routes from "./Routes";
+import Home from "./Home";
 
 const App: React.FC = () => {
   return (
@@ -17,9 +16,7 @@ const App: React.FC = () => {
       </Helmet>
       <ThemeProvider>
         <CSSReset />
-        <BrowserRouter>
-          <Routes />
-        </BrowserRouter>
+        <Home />
       </ThemeProvider>
     </>
   );
