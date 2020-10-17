@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Box, Text } from "@chakra-ui/core";
-import Cell from "./Cell";
 import Grid from "./Grid";
 import { CELL_SIZE } from "../globals";
 import { useAutomata } from "../hooks/useAutomata";
