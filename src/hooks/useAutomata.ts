@@ -1,32 +1,15 @@
-import React, { useCallback, useRef, useState } from "react";
 import produce from "immer";
-import { Box, Button } from "@chakra-ui/core";
+import { useCallback, useRef, useState } from "react";
+import { automataOperations, SIMULATION_SPEED } from "../globals";
 
-import Layout from "../components/Layout";
-
-const NUM_ROWS = 50;
-const NUM_COLS = 50;
-
-const automataOperations = [
-  [0, 1],
-  [0, -1],
-  [1, 0],
-  [-1, 0],
-  [-1, 1],
-  [1, -1],
-  [-1, -1],
-  [1, 1],
-];
-
-const SIMULATION_SPEED = 100;
-
-const HomePage: React.FC = () => {
-  const [grid, setGrid] = useState<number[][]>(() =>
-    Array.from(Array(NUM_ROWS), () => Array(NUM_COLS).fill(0))
-  );
+export const useAutomata = (initialValue: number[][]) => {
+  const [grid, setGrid] = useState<number[][]>(initialValue);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const isRunningRef = useRef(isRunning);
   isRunningRef.current = isRunning;
+
+  const rowLength = grid.length;
+  const colLength = grid[0].length;
 
   const startSimulation = () => {
     setIsRunning(!isRunning);
@@ -48,8 +31,8 @@ const HomePage: React.FC = () => {
      */
     setGrid((previousGrid) => {
       return produce(previousGrid, (newGrid) => {
-        for (let i = 0; i < NUM_ROWS; i++) {
-          for (let j = 0; j < NUM_COLS; j++) {
+        for (let i = 0; i < rowLength; i++) {
+          for (let j = 0; j < colLength; j++) {
             let neighbors = 0;
             automataOperations.forEach(([x, y]) => {
               const newRow = i + x;
@@ -58,9 +41,9 @@ const HomePage: React.FC = () => {
               /** Check if outside of boundaries or not */
               if (
                 newRow >= 0 &&
-                newRow < NUM_ROWS &&
+                newRow < rowLength &&
                 newCol >= 0 &&
-                newCol < NUM_COLS
+                newCol < colLength
               ) {
                 neighbors += previousGrid[newRow][newCol];
               }
@@ -90,45 +73,21 @@ const HomePage: React.FC = () => {
   };
 
   const resetSimulation = () => {
-    setGrid(Array.from(Array(NUM_ROWS), (_) => Array(NUM_COLS).fill(0)));
+    setGrid(initialValue);
   };
   const generateRandomGrid = () => {
     setGrid(
-      Array.from(Array(NUM_ROWS), () =>
-        Array.from(Array(NUM_COLS), () => (Math.random() > 0.5 ? 1 : 0))
+      Array.from(Array(rowLength), () =>
+        Array.from(Array(colLength), () => (Math.random() > 0.5 ? 1 : 0))
       )
     );
   };
-
-  return (
-    <Layout>
-      <Button onClick={startSimulation}>{isRunning ? "Stop" : "Start"}</Button>
-      <Button onClick={resetSimulation}>Clear</Button>
-      <Button onClick={generateRandomGrid}>Randomize</Button>
-      <Box
-        style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${NUM_COLS}, 20px)`,
-          marginBottom: "24px",
-        }}
-      >
-        {grid.map((rows, i) =>
-          rows.map((col, j) => (
-            <Box
-              key={`${i}-${j}`}
-              onClick={() => updateGrid(i, j)}
-              style={{
-                width: 20,
-                height: 20,
-                backgroundColor: grid[i][j] ? "pink" : "white",
-                border: ".5px solid rgba(0,0,0,.5)",
-              }}
-            ></Box>
-          ))
-        )}
-      </Box>
-    </Layout>
-  );
+  return {
+    grid,
+    isRunning,
+    startSimulation,
+    resetSimulation,
+    generateRandomGrid,
+    updateGrid,
+  };
 };
-
-export default HomePage;
