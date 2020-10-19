@@ -18,6 +18,7 @@ const Grid: React.FC<Props> = ({ cells, cellSize, updateGrid }) => {
       {cells.map((rows, i) =>
         rows.map((_, j) => (
           <Cell
+            key={`${i}-${j}`}
             isAlive={!!cells[i][j]}
             updateGrid={() => updateGrid(i, j)}
             cellSize={cellSize}

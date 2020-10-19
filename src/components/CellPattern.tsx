@@ -10,7 +10,7 @@ interface Props {
   structure: number[][];
 }
 
-const Pattern: React.FC<Props> = ({ title, structure }) => {
+const CellPattern: React.FC<Props> = ({ title, structure }) => {
   const { grid, startSimulation, resetSimulation, updateGrid } = useAutomata(
     structure
   );
@@ -30,4 +30,4 @@ const Pattern: React.FC<Props> = ({ title, structure }) => {
     </Box>
   );
 };
-export default Pattern;
+export default CellPattern;
