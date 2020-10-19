@@ -12,7 +12,8 @@ interface Props {
 
 const CellPattern: React.FC<Props> = ({ title, structure }) => {
   const { grid, startSimulation, resetSimulation, updateGrid } = useAutomata(
-    structure
+    structure,
+    250
   );
 
   const handleMouseEnter = () => {

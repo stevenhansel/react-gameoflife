@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Box, Heading, Text } from "@chakra-ui/core";
-
-import Sidebar from "./Sidebar";
+import React, { useState } from "react";
+import { Box, Button, Grid, Heading, Text } from "@chakra-ui/core";
 
 import data from "../data/patterns";
 import { Categories, Pattern } from "../types";
@@ -13,30 +11,37 @@ const PatternSelector: React.FC = () => {
     Categories.StillLifes
   );
 
-  const handleCategoryChange = (selector: Categories) =>
-    setSelectedCategory(selector);
-
   return (
-    <Sidebar>
+    <Box>
       <Heading fontSize={24}>Patterns</Heading>
-      <Box>
-        {Object.entries(Categories).map(([selector, category]) => (
-          <Text
+      <Box display="flex" justifyContent="space-evenly" alignItems="center">
+        {Object.entries(Categories).map(([_, category]) => (
+          <Button
             key={`${category}`}
-            onClick={() => handleCategoryChange(category)}
+            onClick={() => setSelectedCategory(category)}
+            mx={3}
           >
-            {category}
-          </Text>
+            <Text>{category}</Text>
+          </Button>
         ))}
       </Box>
-      <Box>
+      <Box
+        mt={4}
+        display="flex"
+        flexWrap="wrap"
+        justifyContent="space-evenly"
+        alignItems="center"
+        mx="auto"
+      >
         {patterns
           .filter((pattern) => pattern.category === selectedCategory)
           .map(({ title, structure }) => (
-            <CellPattern key={title} title={title} structure={structure} />
+            <Box mx={4}>
+              <CellPattern key={title} title={title} structure={structure} />
+            </Box>
           ))}
       </Box>
-    </Sidebar>
+    </Box>
   );
 };
 

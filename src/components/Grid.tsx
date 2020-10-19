@@ -14,6 +14,7 @@ const Grid: React.FC<Props> = ({ cells, cellSize, updateGrid }) => {
       display="grid"
       gridTemplateColumns={`repeat(${cells[0].length}, ${cellSize}px)`}
       marginBottom={12}
+      transition="ease"
     >
       {cells.map((rows, i) =>
         rows.map((_, j) => (

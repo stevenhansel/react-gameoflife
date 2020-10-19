@@ -2,7 +2,7 @@ import produce from "immer";
 import { useCallback, useRef, useState } from "react";
 import { automataOperations, SIMULATION_SPEED } from "../globals";
 
-export const useAutomata = (initialValue: number[][]) => {
+export const useAutomata = (initialValue: number[][], speed?: number) => {
   const [grid, setGrid] = useState<number[][]>(initialValue);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const isRunningRef = useRef(isRunning);
@@ -62,7 +62,7 @@ export const useAutomata = (initialValue: number[][]) => {
       });
     });
 
-    setTimeout(runSimulation, SIMULATION_SPEED);
+    setTimeout(runSimulation, speed || SIMULATION_SPEED);
   }, []);
 
   const updateGrid = (row: number, col: number) => {
