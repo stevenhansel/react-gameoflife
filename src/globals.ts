@@ -9,7 +9,7 @@ export const automataOperations = [
   [1, 1],
 ];
 
-export const CELL_SIZE = 25;
-export const NUM_ROWS = 32;
-export const NUM_COLS = 32;
-export const SIMULATION_SPEED = 50;
+export const CELL_SIZE = 28;
+export const NUM_ROWS = 28;
+export const NUM_COLS = 28;
+export const SIMULATION_SPEED = 100;

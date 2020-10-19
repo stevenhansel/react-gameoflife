@@ -2,7 +2,17 @@ import { Categories } from "../types";
 
 export default [
   {
-    title: "Boat",
+    title: "Block",
+    category: Categories.StillLifes,
+    structure: [
+      [0, 0, 0, 0],
+      [0, 1, 1, 0],
+      [0, 1, 1, 0],
+      [0, 0, 0, 0],
+    ],
+  },
+  {
+    title: "Beehive",
     category: Categories.StillLifes,
     structure: [
       [0, 0, 0, 0, 0, 0],
@@ -10,6 +20,41 @@ export default [
       [0, 1, 0, 0, 1, 0],
       [0, 0, 1, 1, 0, 0],
       [0, 0, 0, 0, 0, 0],
+    ],
+  },
+  {
+    title: "Loaf",
+    category: Categories.StillLifes,
+    structure: [
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 1, 1, 0, 0],
+      [0, 1, 0, 0, 1, 0],
+      [0, 0, 1, 0, 1, 0],
+      [0, 0, 0, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+    ],
+  },
+  {
+    title: "Boat",
+    category: Categories.StillLifes,
+    structure: [
+      [0, 0, 0, 0, 0],
+      [0, 1, 1, 0, 0],
+      [0, 1, 0, 1, 0],
+      [0, 0, 1, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+    ],
+  },
+  {
+    title: "Boat",
+    category: Categories.StillLifes,
+    structure: [
+      [0, 0, 0, 0, 0],
+      [0, 0, 1, 0, 0],
+      [0, 1, 0, 1, 0],
+      [0, 0, 1, 0, 0],
+      [0, 0, 0, 0, 0],
     ],
   },
   {

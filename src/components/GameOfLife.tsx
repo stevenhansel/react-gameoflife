@@ -16,10 +16,39 @@ const GameOfLife: React.FC = () => {
   } = useAutomata(Array.from(Array(NUM_ROWS), () => Array(NUM_COLS).fill(0)));
 
   return (
-    <Box>
-      <Button onClick={startSimulation}>{isRunning ? "Stop" : "Start"}</Button>
-      <Button onClick={resetSimulation}>Clear</Button>
-      <Button onClick={generateRandomGrid}>Randomize</Button>
+    <Box color="gray.800">
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        maxWidth="40%"
+      >
+        <Button
+          onClick={startSimulation}
+          variant="ghost"
+          variantColor="red"
+          size="md"
+        >
+          {isRunning ? "Stop" : "Start"}
+        </Button>
+        <Button
+          onClick={resetSimulation}
+          variant="ghost"
+          variantColor="red"
+          size="md"
+        >
+          Clear
+        </Button>
+        <Button
+          onClick={generateRandomGrid}
+          variant="ghost"
+          variantColor="red"
+          size="md"
+        >
+          Randomize
+        </Button>
+      </Box>
+
       <Grid cells={grid} cellSize={CELL_SIZE} updateGrid={updateGrid} />
     </Box>
   );

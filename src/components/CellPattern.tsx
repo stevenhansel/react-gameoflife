@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Box, Text } from "@chakra-ui/core";
 import Grid from "./Grid";
@@ -15,19 +15,27 @@ const CellPattern: React.FC<Props> = ({ title, structure }) => {
     structure,
     250
   );
+  const [isHovering, setIsHovering] = useState<boolean>(false);
 
   const handleMouseEnter = () => {
     startSimulation();
+    setIsHovering(true);
   };
   const handleMouseLeave = () => {
     startSimulation();
     resetSimulation();
+    setIsHovering(false);
   };
 
   return (
     <Box onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Text>{title}</Text>
-      <Grid cells={grid} cellSize={CELL_SIZE} updateGrid={updateGrid} />
+      <Grid
+        cells={grid}
+        cellSize={CELL_SIZE}
+        updateGrid={updateGrid}
+        isHovering={isHovering}
+      />
     </Box>
   );
 };

@@ -12,11 +12,19 @@ const PatternSelector: React.FC = () => {
   );
 
   return (
-    <Box>
+    <Box color="gray.700" maxWidth="80%">
       <Heading fontSize={24}>Patterns</Heading>
-      <Box display="flex" justifyContent="space-evenly" alignItems="center">
+      <Box
+        display="flex"
+        justifyContent="space-evenly"
+        alignItems="center"
+        mt={4}
+      >
         {Object.entries(Categories).map(([_, category]) => (
           <Button
+            size="md"
+            variant={selectedCategory === category ? "solid" : "ghost"}
+            variantColor="red"
             key={`${category}`}
             onClick={() => setSelectedCategory(category)}
             mx={3}

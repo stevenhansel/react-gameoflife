@@ -16,7 +16,7 @@ const Cell: React.FC<Props> = ({ isAlive, updateGrid, cellSize }) => {
       boxSizing="border-box"
       borderWidth=".2px"
       borderColor="rgba(0,0,0,.4)"
-      backgroundColor={isAlive ? "green.300" : "white"}
+      backgroundColor={isAlive ? "red.400" : "white"}
       transition="ease"
     />
   );
