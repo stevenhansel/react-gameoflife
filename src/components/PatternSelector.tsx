@@ -1,43 +1,55 @@
 import React, { useState } from "react";
-import { Box, Heading } from "@chakra-ui/core";
+import { Box, Button, Grid, Heading, Text } from "@chakra-ui/core";
 
-import Sidebar from "./Sidebar";
-import Pattern from "./Pattern";
-
-export enum Category {
-  StillLifes = "StillLifes",
-  Oscillators = "Oscillators",
-  Spaceships = "Spaceships",
-}
-
-const exampleBoatStructure = [
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 1, 1, 0, 0],
-  [0, 1, 0, 0, 1, 0],
-  [0, 0, 1, 1, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-];
-
-const exampleToadStructure = [
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 1, 1, 1, 0],
-  [0, 1, 1, 1, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-];
+import data from "../data/patterns";
+import { Categories, Pattern } from "../types";
+import CellPattern from "./CellPattern";
 
 const PatternSelector: React.FC = () => {
-  const [patterns, setPatterns] = useState([]);
+  const [patterns, setPatterns] = useState<Pattern[]>(data);
+  const [selectedCategory, setSelectedCategory] = useState<Categories>(
+    Categories.StillLifes
+  );
 
   return (
-    <Sidebar>
+    <Box color="gray.700" maxWidth="80%">
       <Heading fontSize={24}>Patterns</Heading>
-      <Box>
-        <Pattern title="Beehive" structure={exampleBoatStructure} />
-        <Pattern title="Toad" structure={exampleToadStructure} />
+      <Box
+        display="flex"
+        justifyContent="space-evenly"
+        alignItems="center"
+        mt={4}
+      >
+        {Object.entries(Categories).map(([_, category]) => (
+          <Button
+            size="md"
+            variant={selectedCategory === category ? "solid" : "ghost"}
+            variantColor="red"
+            key={`${category}`}
+            onClick={() => setSelectedCategory(category)}
+            mx={3}
+          >
+            <Text>{category}</Text>
+          </Button>
+        ))}
       </Box>
-    </Sidebar>
+      <Box
+        mt={4}
+        display="flex"
+        flexWrap="wrap"
+        justifyContent="space-evenly"
+        alignItems="center"
+        mx="auto"
+      >
+        {patterns
+          .filter((pattern) => pattern.category === selectedCategory)
+          .map(({ title, structure }) => (
+            <Box mx={4}>
+              <CellPattern key={title} title={title} structure={structure} />
+            </Box>
+          ))}
+      </Box>
+    </Box>
   );
 };
 
